@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<title>TrueHealth | Complaint</title>
+<style type="text/css">
+    
+    @font-face {
+        font-family: GoogleSans-Regular;
+        src: url('{% static "fonts/ProductSans-Regular.ttf" %}'); 
+    }
+
+    #feedback .container{
+        padding: 32px 0;
+        font-family: GoogleSans-Regular;
+    }
+
+    #feedback-heading {
+        font-size: 54px;
+        letter-spacing: -.5px;
+        line-height: 64px;
+        font-family: GoogleSans-Regular;
+        webkit-font-smoothing: antialiased;
+        color: #202124;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
+        padding: 32px;
+    }
+
+    .feedback-input{
+        width: 50%;
+        margin: auto;
+    }
+
+    .form-control{
+        border:none;
+        border-bottom: 1px solid black;
+    }
+
+    .btn{
+        margin-bottom: 30px;
+        margin-top: 25px;
+        background: #1a73e8;
+        align-items: center;
+        border: 0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: inline-flex;
+        height: 44px;
+        -ms-flex-pack: center;
+        justify-content: center;
+        letter-spacing: 0;
+        min-width: 100px;
+        outline: 0;
+        padding: 0 28px;
+        position: relative;
+        text-align: center;
+        transition: .2s;
+        color: #fff;
+    }
+
+    .btn a{
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .btn:hover{
+        background: darkblue;
+        color: #fff;
+    }
+</style>
+
+<!-- COMPLAINT -->
+
+<section id="feedback">
+    <div class="container text-center" id="feedback-heading">
+        <h1>Complaint</h1>
+    </div>
+
+    <div class="container">
+        <form action="{% url 'complaint' %}" method="post" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <div class="feedback-input">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="Doctor Registration ID" name="doctor_id" required maxlength="6">
+                  <label for="floatingInput">Doctor Registration ID</label>
+                </div>
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="Leave a complaint here" id="floatingTextarea2" name="complaint_text" required maxlength="300"></textarea>
+                  <label for="floatingTextarea2">Complaints</label>
+                </div>
+                <div class="container text-center">
+                    <input type="submit" name="complaint" value="Submit" class="btn">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

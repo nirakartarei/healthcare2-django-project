@@ -1,0 +1,381 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<title>TrueHealth | Search a Doctor</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">  
+<style type="text/css">
+    @font-face {
+        font-family: GoogleSans-Regular;
+        src: url('{% static "fonts/ProductSans-Regular.ttf" %}'); 
+    }
+
+    #search-heading{
+        font-size: 54px;
+        letter-spacing: -.5px;
+        line-height: 64px;
+        font-family: GoogleSans-Regular;
+        webkit-font-smoothing: antialiased;
+        color: #202124;
+        font-weight: 700;
+        text-rendering: optimizeLegibility;
+        padding: 32px;
+        margin: 15px 0 20px 0;
+    }
+
+    #search form{
+        width: 100%;
+        max-width: 790px;
+        margin: auto;
+    }
+
+    .basic-search {
+        box-shadow: 0px 8px 20px 0px rgb(0 0 0 / 15%);
+        overflow: hidden;
+        border-radius: 34px;
+        margin-bottom: 5px;
+    }
+
+    .input-field {
+        width: 100%;
+        position: relative;
+        color: #fff;
+    }
+
+    .input-field input {
+        height: 100%;
+        border: 0;
+        display: block;
+        width: 100%;
+        padding: 10px 80px 10px 40px;
+        font-size: 18px;
+        height: 70px;
+        color: #000;
+        background-color: #2f4353;
+        background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
+        font-family: GoogleSans-Regular, 'Open Sans', sans-serif;
+        line-height: 1.15;
+    }
+
+    .input-field input::-webkit-input-placeholder {
+        color: #000;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .input-field input:hover, .input-field input:focus {
+        box-shadow: none;
+        outline: 0;
+    }   
+
+    .input-field .icon-wrap {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 60px;
+        height: 100%;
+    }
+
+    .icon-wrap svg {
+        width: 34px;
+        height: 34px;
+        fill: #fff;
+    }
+
+    .search-btn{
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .search-btn .btn-search {
+        min-width: 110px;
+        height: 50px;
+        padding: 0 15px;
+        background: 
+            linear-gradient(to right, #2c6dd5 0%, #2c6dd5 28%, #ff4b5a 91%, #ff4b5a 100%);
+        white-space: nowrap;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 400;
+        color: #fff;
+        transition: all .2s ease-out, color .2s ease-out;
+        border: 0;
+        cursor: pointer;
+        font-weight: 400;
+        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+        z-index: 0;
+        position: relative;
+        font-family: GoogleSans-Regular, "Open Sans", sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .search-btn .btn-search:before {
+        border-radius: inherit;
+        background: linear-gradient(45deg, #ff4b5a 0%, #ff4b5a 28%, #2c6dd5 91%, #2c6dd5 100%);
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        z-index: -1;
+        transition: all .2s ease-out, color .2s ease-out;
+    }
+
+    .search-btn .btn-search:hover::before {
+        opacity: 1;
+    }
+
+    .search-btn .btn-search:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+
+    .ui-autocomplete
+    {
+        cursor: pointer;
+        position: absolute;
+        padding: 10px 60px 10px 40px;
+        border-radius: 30px;
+        font-family: GoogleSans-Regular, 'Open Sans',sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+        border: none;
+        background: transparent;
+        color: #000;
+        cursor: pointer;
+    }
+
+    .page-btn{
+        font-family: GoogleSans-Regular, sans-serif;
+        text-decoration: none;
+        color: #fff;
+        margin-bottom: 30px;
+        margin-top: 10px;
+        background: #0d6efd;;
+        align-items: center;
+        border: 0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: inline-flex;
+        height: 44px;
+        -ms-flex-pack: center;
+        justify-content: center;
+        letter-spacing: 0;
+        min-width: 100px;
+        outline: 0;
+        padding: 0 28px;
+        position: relative;
+        text-align: center;
+        transition: .2s;
+    }
+
+    .page-btn:hover{
+        background: darkblue;
+        color: #fff;
+    }
+
+
+    .card {
+        border: none;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        cursor: pointer
+    }
+
+    .card:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background-color: #E1BEE7;
+        transform: scaleY(1);
+        transition: all 0.5s;
+        transform-origin: bottom
+    }
+
+    .card:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background-color: #8E24AA;
+        transform: scaleY(0);
+        transition: all 0.5s;
+        transform-origin: bottom
+    }
+
+    .card:hover::after {
+        transform: scaleY(1)
+    }
+
+    .fonts {
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+
+    .buttons a{
+        color: #8E24AA;
+        background: #fff;
+        margin-top: 30px;
+    }
+
+    .buttons a:nth-child(1) {
+        border: 1px solid #8E24AA !important;
+        color: #8E24AA;
+        height: 40px
+    }
+
+    .buttons a:nth-child(1):hover {
+        border: 1px solid #8E24AA !important;
+        color: #fff;
+        height: 40px;
+        background-color: #8E24AA
+    }
+
+    .profile{
+        font-family: GoogleSans-Regular, sans-serif;
+    }
+
+</style>
+
+
+<section for="Search" id="search">
+    <div class="container text-center" id="search-heading">
+        <h1>Search</h1>
+    </div>
+
+    <div class="container search-box" style="width: 100%;">
+        <form method="GET" action="{% url 'SearchDoctor' %}">
+            {% csrf_token %}
+            <div class="basic-search">
+                <div class="input-field">
+                    <input id="auto" type="text" name="search" placeholder="Type Name to Search" {% if query %} value='{{ query }}' {% endif %} required />
+                    <div class="icon-wrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99    5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="search-btn">
+                <input type="submit" class="btn-search" value="Search">
+            </div>
+        </form>
+    </div>
+
+
+    {% if sr %}
+
+    <div class="container text-center" id="search-heading">
+        <h1 style="font-size:36px;">{{ count }} Doctor(s) Found</h1>
+    </div>
+
+    <div class="container mt-5 profile">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-5">
+                {% for result in sr %}
+                <div class="card p-3 py-4 shadow-lg" style="margin-top: 10px;margin-bottom: 5em;">
+                    <div class="text-center"> 
+                        <img src="{{ result.image.url }}" width="60%" height="auto" class="rounded-circle" alt="Profile Picture"> 
+                    </div>
+                    <div class="text-center mt-3"> 
+                        <span class="bg-secondary p-1 px-4 rounded text-white" style="font-size:20px;text-transform: uppercase;">
+                            {{ result.max_qualification }}
+                        </span>
+                        <h3 class="mt-2 mb-0" style="font-size: 32px;">Dr. {{ result.name }}</h5> <span style="font-size:22px;">ID: {{ result.registration_number }}</span>
+                        <div class="px-4 mt-4">
+                            <p class="fonts"><i>Council</i> : {{ result.council }}</p>
+                            <p class="fonts"><i>University</i> : {{ result.university }}</p>
+                            <p class="fonts"><i>Passing Year</i> : {{ result.qualified_year }}</p>
+                        </div>
+                        <div class="buttons">  
+                            <a href="{% url 'detailed_view' result.registration_number %}" class="btn btn-primary px-4 ms-3">View Profile</a> 
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="container text-center" id="search-heading">
+        <h1>All Records of Doctors</h1>
+    </div>
+
+    <div class="container">
+        <div class="container mt-5 profile">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-5">
+                    {% for doctor in page.object_list %}
+                    <div class="card p-3 py-4 shadow-lg" style="margin-top: 10px;margin-bottom: 5em;">
+                        <div class="text-center"> 
+                            <img src="{{ doctor.image.url }}" width="60%" height="auto" class="rounded-circle" alt="Profile Picture"> 
+                        </div>
+                        <div class="text-center mt-3"> 
+                            <span class="bg-secondary p-1 px-4 rounded text-white" style="font-size:20px;text-transform: uppercase;">
+                                {{ doctor.max_qualification }}
+                            </span>
+                            <h3 class="mt-2 mb-0" style="font-size: 32px;">Dr. {{ doctor.name }}</h5> <span style="font-size:22px;">ID: {{ doctor.registration_number }}</span>
+                            <div class="px-4 mt-4">
+                                <p class="fonts"><i>Council</i> : {{ doctor.council }}</p>
+                                <p class="fonts"><i>University</i> : {{ doctor.university }}</p>
+                                <p class="fonts"><i>Passing Year</i> : {{ doctor.qualified_year }}</p>
+                            </div>
+                            <div class="buttons">  
+                                <a href="{% url 'detailed_view' doctor.registration_number %}" class="btn btn-primary px-4 ms-3">View Profile</a> 
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        {% if page.has_previous %}
+            <a href="{% url 'SearchPage' %}?page={{ page.previous_page_number }}"
+                class="page-btn">
+                Previous Page
+            </a>
+        {% endif %}
+        {% if page.has_next %}
+            <a href="{% url 'SearchPage' %}?page={{ page.next_page_number }}"
+                class="page-btn">
+                Next Page
+            </a>
+        {% endif %}
+    </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    $( function() {
+        $( "#auto" ).autocomplete(
+        {
+            source: '{% url "SearchPage"%}'
+        });
+  } );
+</script>
+
+
+{% endblock %}

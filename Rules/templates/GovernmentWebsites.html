@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<title>TrueHealth | Government Websites</title>
+<style type="text/css">
+    @font-face {
+        font-family: GoogleSans-Regular;
+        src: url('{% static "fonts/ProductSans-Regular.ttf" %}'); 
+    }
+
+    @font-face {
+        font-family: GoogleSans-Light;
+        src: url('{% static "fonts/ProductSans-Light.ttf" %}'); 
+    }
+
+    #websites .container{
+        padding: 40px;
+        font-family: GoogleSans-Regular, 'Open Sans', sans-serif;
+    }
+
+    .title{
+        text-align: center;
+    }
+
+    .heading{
+        font-size: 2.7rem;
+        letter-spacing: -.03125rem;
+        line-height: 4.0625rem;
+        -webkit-font-smoothing: antialiased;
+        margin: 20px auto;
+    }
+
+    .sub-heading{
+        font-size: 1.5625rem;
+        line-height: 2.0625rem;
+        -webkit-font-smoothing: antialiased;
+        color: #5f6368;
+        letter-spacing: .03125rem;
+        font-weight: 400;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    .sub-heading:hover{
+        color: #000;
+        cursor: pointer;
+    }
+
+    .website-row{
+        margin: 50px 0;
+    }
+
+    .website-col{
+        text-align: center;
+        padding: 0 25px;
+    }
+
+    .website-image img{
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 5px 10px 18px #888888;
+    }
+
+    .website-desc{
+        font-family: GoogleSans-Light;
+        padding: 32px 0;
+    }
+
+    .website-heading{
+        font-size: 1.5625rem;
+        line-height: 2.0625rem;
+        font-weight: bold;
+        margin-bottom: 22px;
+        -webkit-font-smoothing: antialiased;
+        color: #202124;
+        letter-spacing: 0;
+    }
+
+    .website-link a{
+        font-size: 1rem;
+        line-height: 1.625rem;
+        text-decoration: none;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+        color: #1a73e8;
+        letter-spacing: .03125rem;
+    }
+
+    .website-link a:hover{
+        color: darkblue;
+    }
+
+</style>
+
+<!-- GOV WEBSITES -->
+<section id="websites">
+    <div class="container title">
+        <h1 class="heading">Official Websites of Government</h1>
+        <a class="sub-heading" href="https://www.india.gov.in/my-government/whos-who/council-ministers" target="_blank">
+            Ministry of India
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="row website-row">
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                   <img src="{% static 'imgs/GW/Gw_1.JPG' %}" alt="Mohfw"> 
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">Ministry of Health & Family Welfare</h3>
+                    <p class="website-link">
+                        <a href="https://mohfw.gov.in/" target="_blank">
+                            Learn more about MOHFW
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                   <img src="{% static 'imgs/GW/Gw_2.JPG' %}" alt="Nhp"> 
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">National Health Portal</h3>
+                    <p class="website-link">
+                        <a href="https://www.nhp.gov.in/" target="_blank">
+                            Learn more about NHP
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row website-row">
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                   <img src="{% static 'imgs/GW/Gw_3.JPG' %}" alt="nhm">
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">National Health Mission</h3>
+                    <p class="website-link">
+                        <a href="https://nhm.gov.in/" target="_blank">
+                            Learn more about NHM
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                    <img src="{% static 'imgs/GW/Gw_4.JPG' %}" alt="nhrsc"> 
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">National Health System Resource Center</h3>
+                    <p class="website-link">
+                        <a href="http://nhsrcindia.org/" target="_blank">
+                            Learn more about NHRSC
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row website-row">
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                   <img src="{% static 'imgs/GW/Gw_5.JPG' %}" alt="pmjay">
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">National Health Authority</h3>
+                    <p class="website-link">
+                        <a href="https://pmjay.gov.in/about-nha" target="_blank">
+                            Learn more about NHA
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                    <img src="{% static 'imgs/GW/Gw_6.JPG' %}" alt="dhr">
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">Department of Health Research</h3>
+                    <p class="website-link">
+                        <a href="https://dhr.gov.in/" target="_blank">
+                            Learn more about DHR
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row website-row">
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                   <img src="{% static 'imgs/GW/Gw_8.JPG' %}" alt="icmr">
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">Indian Council of Medical Association</h3>
+                    <p class="website-link">
+                        <a href="https://www.icmr.nic.in/" target="_blank">
+                            Learn more about ICMA
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                    <img src="{% static 'imgs/GW/Gw_9.JPG' %}" alt="ima">
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">Indian Medical Association</h3>
+                    <p class="website-link">
+                        <a href="http://www.ima-india.org/ima/" target="_blank">
+                            Learn more about IMA
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row website-row">
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                   <img src="{% static 'imgs/GW/Gw_7.JPG' %}" alt="dghs">
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">Directorate General of Health Services</h3>
+                    <p class="website-link">
+                        <a href="https://dghs.gov.in/" target="_blank">
+                            Learn more about DGHS
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 website-col">
+                <div class="website-image">
+                    <img src="{% static 'imgs/GW/Gw_11.JPG' %}" alt="Hospital Directory">
+                </div>
+                <div class="website-desc">
+                    <h3 class="website-heading">Hospital Directory</h3>
+                    <p class="website-link">
+                        <a href="https://data.gov.in/catalog/hospital-directory-national-health-portal?filters%5Bfield_catalog_reference%5D=323881&format=json&offset=0&limit=6&sort%5Bcreated%5D=desc" target="_blank">
+                            Learn more about Hospital Directory
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

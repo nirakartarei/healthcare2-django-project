@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+{% url 'home' as home_url %}
+{% url 'contact' as contact_url %}
+{% url 'SearchPage' as search_url %}
+{% url 'login' as login_url %}
+{% url 'rules' as rules_url %}
+{% url 'websites' as website_url %}
+
+<html lang="en">
+{% load static %}
+    <head>
+
+        <!--META TAGS  -->
+
+        <meta charset="UTF-8">
+        <meta name="description" content="Legal Doctors Check">
+        <meta name="keywords" content="Legal,Doctor,Hospital,Pharmacy,Fraud,Fraud Doctor, Illegal">
+        <meta name="author" content="Suyash Phatak">
+        <meta http-equiv="x-ua-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+        <!-- CSS & BOOTSTRAP LINKS-->
+        <link rel = "icon" href ="https://storage.needpix.com/rsynced_images/doctor-2411135_1280.png" type = "image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+
+        <!-- TOP HEADER -->
+
+        <header id="header-top">
+
+            <div class="container-fluid">
+                <div class="row top-nav">
+                    <div class="col">
+                        <div class="d-flex align-items-center">
+                            <div class="social">
+                                <a href="#" class="justify-content-center social-icons">
+                                    <span class="fa fa-facebook ico">
+                                        <i class="sr-only">Facebook</i>
+                                    </span>
+                                </a>
+                                <a href="#" class="justify-content-center social-icons">
+                                    <span class="fa fa-twitter ico">
+                                        <i class="sr-only">Twitter</i>
+                                    </span>
+                                </a>
+                                <a href="#" class="justify-content-center social-icons">
+                                    <span class="fa fa-instagram ico">
+                                        <i class="sr-only">Instagram</i>
+                                    </span>
+                                </a>
+                                <a href="#" class="justify-content-center social-icons">
+                                    <span class="fa fa-linkedin ico">
+                                        <i class="sr-only">Linkedin</i>
+                                    </span>
+                                </a>
+                            </div> 
+                        </div>
+                        
+                    </div>
+                    <div class="col text-center">
+                        <a class="navbar-brand" href="{% url 'home' %}">
+                            <img src="{% static 'imgs/logo5.1.png' %}" width="55px" height="auto">
+                            <span style="color:#7fa329">True</span><span style="color:#3c4794">Health</span>
+                        </a>
+                    </div>
+
+                    <div class="col d-md-flex justify-content-end" style="margin-top: 3px;">
+                        <form method="GET" action="{% url 'home_search' %}" class="searchform order-lg-last" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group d-flex">
+                                <input type="text" class="form-control pl-3" placeholder="Search a Doctor" name="search">
+                                <button type="submit" class="form-control search">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light ftco_navbar bg-light ftco-navbar-light">
+                <div class="container-fluid" style="border-bottom: 1px solid #e8eaed;">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="fa fa-bars"></span> Menu
+                    </button>
+                    <div class="collapse navbar-collapse" id="ftco-nav">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item {% if request.path == home_url %} active {%endif%}">
+                                <a href="{{ home_url }}" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item {% if request.path == search_url %} active {%endif%}">
+                                <a href="{{ search_url }}" class="nav-link">Search Doctors</a>
+                            </li>
+                            <li class="nav-item dropdown 
+                            {% if request.path == rules_url %}
+                            active 
+                            {% elif request.path == website_url %}
+                            active
+                            {% endif %}">
+                                <a class="nav-link dropbtn" href="#" style="border: none;background: inherit;">
+                                    Government Regulations <i class="fa fa-caret-down"></i>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a class="dropdown-item" href="{{ rules_url }}">
+                                        Government Rules
+                                    </a>
+                                    <a class="dropdown-item" href="{{ website_url }}">
+                                        Government Websites
+                                    </a>
+                                </div>
+                           </li>
+                            
+                            <li class="nav-item {% if request.path == contact_url %} active {%endif%}">
+                                <a href="{{ contact_url }}" class="nav-link">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="container" style="padding: 32px;">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+
+        <br>
+
+        <!-- MAIN FOOTER -->
+
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col text-center" style="padding: 20px;">
+                        <p class="bottom-logo">
+                           <a class="navbar-brand" href="{{ home_url }}">
+                                <img src="{% static 'imgs/logo5.1.png' %}" alt="Website Logo" width="100px" height=auto>
+                            </a> 
+                        </p>
+                        <p class="bottom-logo">
+                            <a class="navbar-brand" href="{{ home_url }}">
+                                <span class="logo-txt1">True</span><span class="logo-txt2">Health</span>
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="col">
+                        <div class="d-flex flex-row">
+                            <div class="f-nav">
+                                <nav class="navbar">
+                                    <ul class="navbar-nav">
+                                        <li>
+                                            <p style="font-size: 18px;font-weight: 600;">
+                                                Quick Links
+                                            </p>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ home_url }}">
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% static 'pdfs/privacy_policy.pdf' %}" target="_blank">
+                                                Privacy Policy
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% static 'pdfs/Terms.pdf' %}" target="_blank">
+                                                Terms & Conditions
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ contact_url }}">
+                                                Contact
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+
+                            <div class="f-nav">
+                                <nav class="navbar">
+                                    <ul class="navbar-nav">
+                                        <li>
+                                            <p style="font-size: 18px;font-weight: 600;">
+                                                Services
+                                            </p>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ search_url }}">
+                                                Search a Doctor
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ rules_url }}">
+                                                Official Rules
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ website_url }}">
+                                                Official Websites
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col text-center" style="padding: 20px;">
+                        <div class="justify-content-center">
+                            <p style="font-size: 18px;font-weight: 600;margin-top: 8px;">
+                                Follow Us At Our Social Media
+                            </p>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="social-footer">
+                                <a href="#" class="justify-content-center social-f-icons">
+                                    <span class="fa fa-facebook ico-f">
+                                        <i class="sr-only">Facebook</i>
+                                    </span>
+                                </a>
+                                <a href="#" class="justify-content-center social-f-icons">
+                                    <span class="fa fa-twitter ico-f">
+                                        <i class="sr-only">Twitter</i>
+                                    </span>
+                                </a>
+                                <a href="#" class="justify-content-center social-f-icons">
+                                    <span class="fa fa-instagram ico-f">
+                                        <i class="sr-only">Instagram</i>
+                                    </span>
+                                </a>
+                                <a href="#" class="justify-content-center social-f-icons">
+                                    <span class="fa fa-linkedin ico-f">
+                                        <i class="sr-only">Linkedin</i>
+                                    </span>
+                                </a>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="copyright">
+                    <p>
+                        <small>
+                            Copyright 2023. All Rights Reserved. @Developed by NIRAKAR
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+
+
+        <!-- BOOTSTRAP JS -->
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(){
+        
+                window.addEventListener('scroll', function() {
+                   
+                    if (window.scrollY > 200) {
+                        document.getElementById('navbar_top').classList.add('fixed-top');
+                        document.getElementById('navbar_top').classList.add('shadow');
+                        // add padding top to show content behind navbar
+                        navbar_height = document.querySelector('.navbar').offsetHeight;
+                        document.body.style.paddingTop = navbar_height + 'px';
+                    } 
+                    else {
+                        document.getElementById('navbar_top').classList.remove('fixed-top');
+                        document.getElementById('navbar_top').classList.remove('shadow');
+                         // remove padding top from body
+                        document.body.style.paddingTop = '0';
+                    } 
+                });
+            }); 
+        </script>
+    </body>
+</html>
